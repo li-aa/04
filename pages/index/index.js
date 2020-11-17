@@ -9,6 +9,24 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+  butlogin:function(e){
+    wx.login({
+      success (res) {
+        // console.log(res);
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'http://shop.2004.com/code',
+            data: {
+              code: res.code
+            }
+          });
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
@@ -16,6 +34,24 @@ Page({
     })
   },
   onLoad: function () {
+    let _this = this;
+    wx.request({
+      url: 'http://wx.2004.com/text', //仅为示例，并非真实的接口地址
+      data: {
+        x: 'aaa',
+        y: 'aaa'
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        // console.log(this)
+        _this.setData({
+          name: res.data.name,
+          price: res.data.price
+        })
+      }
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

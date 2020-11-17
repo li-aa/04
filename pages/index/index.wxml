@@ -8,6 +8,11 @@
     </block>
   </view>
   <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+    <text class="user-motto">{{name}}</text>
+    <text class="user-motto">{{price}}</text>
+
+  </view>
+  <view>
+    <button type="primary" bindtap="butlogin">登录</button>
   </view>
 </view>
