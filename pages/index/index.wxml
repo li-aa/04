@@ -14,5 +14,13 @@
   </view>
   <view>
     <button type="primary" bindtap="butlogin">登录</button>
+    <button type="primary" bindtap="loginInfo">Storage</button>
+
   </view>
+  
+<view wx:for="{{userData}}" wx-for-index="index" wx-for-item="item">
+  商品id:{{item.goods_id}}
+ 名称：{{item.goods_name}}
 </view>
+</view>
+

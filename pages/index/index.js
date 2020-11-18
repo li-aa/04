@@ -4,10 +4,12 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    // motto: 'Hello World',
+    // userInfo: {},
+    // hasUserInfo: false,
+    // canIUse: wx.canIUse('button.open-type.getUserInfo')
+    'message':'message-string',
+    'userData':[{id:"123",name:"123"},{id:"456",name:"456"}]
   },
   butlogin:function(e){
     wx.login({
@@ -19,11 +21,30 @@ Page({
             url: 'http://shop.2004.com/code',
             data: {
               code: res.code
+            },
+            success:function(d)
+            {
+              //获取登录token
+              // console.log(33333333)
+              wx.setStorage({
+                key:"token",
+                data:d.data.data.token,
+                
+              })
             }
           });
         } else {
           console.log('登录失败！' + res.errMsg)
         }
+      }
+    })  
+  },
+  loginInfo:function(e)
+  {
+    let s = wx.getStorage({
+      key: 'token',
+      success(res){
+        console.log(wx.getStorageSync('token'))  
       }
     })
   },
@@ -34,22 +55,22 @@ Page({
     })
   },
   onLoad: function () {
-    let _this = this;
-    wx.request({
-      url: 'http://wx.2004.com/text', //仅为示例，并非真实的接口地址
-      data: {
-        x: 'aaa',
-        y: 'aaa'
+    var that = this;//把this对象复制到临时变量that
+    const wxreq = wx.request({
+      url: 'http://shop.2004.com/xuan',
+      data:{
+        //id:"1",
+        //name:'Leanne Graham'
       },
-      header: {
-        'content-type': 'application/json' // 默认值
+      success: function (res){
+        // console.log(res.data);
+        this.userData = res.data; //无效不能实时的渲染到页面
+        that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页面
+    
       },
-      success (res) {
-        // console.log(this)
-        _this.setData({
-          name: res.data.name,
-          price: res.data.price
-        })
+      fail: function (res){
+        console.log(res.data);
+        this.userData = "数据获取失败";
       }
     })
     if (app.globalData.userInfo) {
