@@ -1,1 +1,106 @@
 /* pages/detail/detail.wxss */
+.swipper-box{
+  position:relative;
+}
+
+.swipper-box swiper{
+  height: 650rpx;
+}
+
+
+.swipper-box swiper image{
+  height: 100%;
+  width: 100%;
+}
+
+.swipper-box .tips {
+  position:absolute;
+  bottom:30rpx;
+  right:90rpx;
+  background:#333;
+  opacity:0.6;
+  border-radius:20rpx;
+  color:white;
+}
+@font-face {font-family: "iconfont";
+  src: url('//at.alicdn.com/t/font_2216698_f97orpopxav.eot?t=1605841271585'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_2216698_f97orpopxav.eot?t=1605841271585#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'),
+  url('//at.alicdn.com/t/font_2216698_f97orpopxav.woff?t=1605841271585') format('woff'),
+  url('//at.alicdn.com/t/font_2216698_f97orpopxav.ttf?t=1605841271585') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_2216698_f97orpopxav.svg?t=1605841271585#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shouye:before {
+  content: "\e61a";
+}
+
+.icon-gouwuche:before {
+  content: "\e634";
+}
+
+.icon-kefu:before {
+  content: "\e6b4";
+}
+
+.bottom-nav {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+}
+
+.bottom-nav .iconfont
+{
+  font-size:16px;
+}
+
+.bottom-nav .nav-icon
+{
+  background-color:#eeeeee;
+  flex: 0.5;
+  text-align: center;
+}
+
+.bottom-nav .nav-addcart {
+  flex: 1;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: orange;
+  color: #fff;
+}
+
+.bottom-nav .nav-buynow {
+  flex: 1;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: #ffcc00;
+  color: #fff;
+
+}
+
+.desc-box {
+  margin-top: 20rpx;
+  width: 100%;
+  padding:20rpx;
+  margin-bottom: 65rpx;
+}
+
+.desc-box .desc-img {
+  margin: 0;
+}
+
+.desc-box image {
+  width: 100%;
+}

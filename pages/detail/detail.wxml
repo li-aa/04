@@ -1,2 +1,44 @@
 <!--pages/detail/detail.wxml-->
 <text>pages/detail/detail.wxml</text>
+
+
+<!-- 商品相册 开始 -->
+<view class="swipper-box">
+  <swiper indicator-dots="{{indicatorDots}}" bindchange="swipperChange"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgs}}" wx:for-index='index'>
+      <swiper-item>
+        <image src="{{imgs[index]}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="tips">
+      <text>{{current+1}}/{{imgs.length}}</text>
+  </view>
+
+</view>
+
+<view class="goods-list">
+  <view class="goods-info">
+        <view class="title">{{data.goods_name}}</view>
+        <view class="price">¥ {{data.shop_price}}</view>
+    </view>
+
+  </view>
+  <view class="bottom-nav">
+        <view class="nav-icon">
+            <view class="iconfont icon-shouye"></view>
+            <view> 首页 </view>
+        </view>
+        <view class="nav-icon">
+            <view class="iconfont icon-kefu"></view>
+            <view> 客服 </view>
+        </view>
+        <view class="nav-icon">
+            <view class="iconfont icon-gouwuche"></view>
+            <view> 购物车 </view>
+        </view>
+        <view class="nav-addcart">加入购物车</view>
+        <view class="nav-buynow">立即购买</view>
+    </view>

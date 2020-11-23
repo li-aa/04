@@ -4,12 +4,29 @@ const app = getApp()
 
 Page({
   data: {
-    // motto: 'Hello World',
-    // userInfo: {},
-    // hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo')
-    'message':'message-string',
-    'userData':[{id:"123",name:"123"},{id:"456",name:"456"}]
+    banners: ['/img/goods.jpg', '/img/car1.jpg', '/img/car2.jpg'],
+    indicatorDots: true,
+    vertical: false,
+    autoplay: true,
+    interval: 5000,
+    duration: 200,
+    list: [],
+    page:1,
+    pagesize:5
+  },
+  
+// onShareAppMessage: function () {
+//   return {
+//       title: '测试转发',
+//       path: 'http://shop.2004.com/detail',
+//       success: function (res) {
+// 　　         console.log(res)
+//       }
+//   }
+// },
+  onReachBottom : function() {
+    this.data.page++
+    this.getGoodsList();
   },
   butlogin:function(e){
     wx.login({
@@ -54,58 +71,70 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
-    var that = this;//把this对象复制到临时变量that
-    const wxreq = wx.request({
-      url: 'http://shop.2004.com/xuan',
-      data:{
-        //id:"1",
-        //name:'Leanne Graham'
-      },
-      success: function (res){
-        // console.log(res.data);
-        this.userData = res.data; //无效不能实时的渲染到页面
-        that.setData({ userData: res.data });//和页面进行绑定可以动态的渲染到页面
-    
-      },
-      fail: function (res){
-        console.log(res.data);
-        this.userData = "数据获取失败";
-      }
-    })
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+  getGoodsList: function()
+{
+  let _this = this;
+  wx.request({
+    url: 'http://shop.2004.com/xuan',
+    data:{
+      page:_this.data.page,   //分页 页号
+      size:_this.data.pagesize
+    },
+    header:{'content-type': 'application/json'},
+    success(res){
+      let new_list = _this.data.list.concat(res.data.data.list)
+      _this.setData({
+        //list: res.data.data.list
+        list: new_list
       })
     }
-  },
+  })
+},
+
+onLoad: function () {
+  
+  // console.log(opt)
+  // let that = this;
+  // let pin;
+  // let item = JSON.parse(opt.item);
+  // console.log(item)
+  // that.setData({
+  //     item: item
+  // })
+  // let slider = item.slider.split(",");
+  // let detail = item.detail.split(",");
+  // if (opt.ping) {
+  //     pin = true;
+  // } else {
+  //     pin = false;
+  // }
+
+  // that.setData({
+  //     mess: item,
+  //     pin: pin,
+  
+  //     debanners: slider,
+  //     piclsit: detail
+  // });
+  this.getGoodsList();
+
+},
   getUserInfo: function(e) {
-    console.log(e)
+    // console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+
+  goodsDetail:function(e)
+{
+  //获取被点击的 商品id
+  let goodsid = e.currentTarget.dataset.goodsid;
+  //切换至 详情页
+  wx.redirectTo({
+    url: '/pages/detail/detail?goods_id='+goodsid
+  });
+}
 })

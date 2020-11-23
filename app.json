@@ -7,7 +7,9 @@
     "pages/my/my",
     "pages/order/order",
     "pages/cart/cart",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/guen/guen",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,14 +39,15 @@
         "selectedIconPath": "img/shopcart-select.png",
         "pagePath": "pages/cart/cart",
         "text": "购物车"
-      }, {
+      },
+      {
         "iconPath": "img/order.png",
         "selectedIconPath": "img/order-select.png",
-        "pagePath": "pages/order/order",
+        "pagePath": "pages/guen/guen",
         "text": "订单"
       }
-      
     ]
   },
-  "sitemapLocation": "sitemap94.json"
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
 }

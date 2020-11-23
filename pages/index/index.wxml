@@ -1,26 +1,47 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+      circular="true">
+      <block wx:for="{{banners}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view  class="title-menu">
+        <view class="title-menu-item active"> 全部 </view>
+						<view class="title-menu-item">衣服</view>
+						<view class="title-menu-item">外套</view>
+						<view class="title-menu-item">鞋子</view>
+						<view class="title-menu-item">帽子</view>
+						<view class="title-menu-item">裤子</view>
+						<view class="title-menu-item">车</view>
+						<view class="title-menu-item">床</view>
+						<view class="title-menu-item">沙发</view>
+						<view class="title-menu-item">书柜</view>
+						<view class="title-menu-item">桌</view>
+						<view class="title-menu-item">椅</view>
+						<view class="title-menu-item">板凳</view>
+    </view>
+<view class="goods-list">
+<view class="item" wx:for="{{list}}" data-goodsid="{{item.goods_id}}" bindtap="goodsDetail">
+  <view class="img">
+    <image src="{{item.goods_img}}"></image>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{name}}</text>
-    <text class="user-motto">{{price}}</text>
+  <view class="content">
+    <view class="title">{{item.goods_name}}</view>
+    <view class="brand">Nokia</view>
+    <view class="price"> $ {{item.shop_price}} </view>
+  </view>
+</view>
+</view>
 
-  </view>
+
+
+<view class="container">
+
   <view>
     <button type="primary" bindtap="butlogin">登录</button>
-    <button type="primary" bindtap="loginInfo">Storage</button>
+    <button type="primary" bindtap="loginInfo">打印token</button>
 
   </view>
-  
-<view wx:for="{{userData}}" wx-for-index="index" wx-for-item="item">
-  商品id:{{item.goods_id}}
- 名称：{{item.goods_name}}
 </view>
-</view>
-
